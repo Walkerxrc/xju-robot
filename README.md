@@ -3,6 +3,9 @@ XJU robot project for algorithm teaching.<br>
 Code and teaching video are being revised and updated periodically.<br>
 Thanks for watching and please kindly leave a STAR for me.
 
+## Documentation
+- [ICP 求解流程指南](docs/icp-solution-guide.md)
+
 Deploy<br>
 Video link:【小橘工程部署】 https://www.bilibili.com/video/BV19o4y1W7jC/?share_source=copy_web&vd_source=88e435df3261250165e3c0b331a63754
 
