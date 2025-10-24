@@ -5,6 +5,8 @@ add_compile_options(-std=c++17)
 find_package(PCL REQUIRED)
 find_package(OpenCV REQUIRED)
 
+add_definitions(${PCL_DEFINITIONS})
+
 find_package(catkin REQUIRED
         COMPONENTS roscpp
         pcl_ros
@@ -20,7 +22,7 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}
 
 catkin_package(CATKIN_DEPENDS std_msgs sensor_msgs message_runtime)
 
-include_directories(include ${catkin_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS})
+include_directories(include ${catkin_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS} ${PCL_INCLUDE_DIRS})
 
 add_executable(xju_perception src/main.cpp src/ukf.cpp)
 
@@ -30,4 +32,14 @@ target_link_libraries(xju_perception
 
 add_dependencies(xju_perception ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
-install(TARGETS xju_perception DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+add_executable(pcl_icp_example src/icp_example.cpp)
+
+target_link_libraries(pcl_icp_example
+        ${PCL_LIBRARIES})
+
+add_dependencies(pcl_icp_example ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+
+install(TARGETS
+        xju_perception
+        pcl_icp_example
+        DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
